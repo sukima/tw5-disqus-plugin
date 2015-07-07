@@ -1,0 +1,6 @@
+node_modules/
+**/output/
+tiddlers/\$__StoryList.tid
+tiddlers/\$__config_disqus_identifier.tid
+tiddlers/\$__config_disqus_url.tid
+tiddlers/\$__config_disqus_title.tid

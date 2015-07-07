@@ -1,0 +1,19 @@
+title: $:/plugins/sukima/disqus/DisqusControlPanel
+caption: Disqus
+tags: $:/tags/ControlPanel
+
+\define disqus-admin-link(text)
+<a href="//$(shortname)$.disqus.com/admin/settings/" class="tc-wikilink-external" target="_blank">$text$</a>
+\end
+
+<div class="tc-message-box">
+<p>Any changes to the ''Disqus shortname'' will require a full save and refresh.</p>
+</div>
+
+''Disqus shortname'': <$edit-text tiddler="$:/config/disqus/shortname" tag="input" default=""/>
+
+<$set name="shortname" value={{$:/config/disqus/shortname!!text}}>
+
+Further options can be customized on the <<disqus-admin-link "Disqus Admin page">>.
+
+</$set>

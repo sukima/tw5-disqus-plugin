@@ -1,0 +1,24 @@
+title: $:/plugins/disqus/style
+tags: [[$:/tags/Stylesheet]]
+
+/* TiddlyWiki strips out leading # characters */
+body #disqus_thread {
+  padding-right: 20px;
+  /* Default Disqus config auto detects light/dark style based on foreground
+   * color. We don't want the standard sidebar forground but instead the main
+   * site text color. */
+  color: <<colour foreground>>;
+}
+
+.disqus-comment-count {
+  font-weight: bold;
+  color: <<colour primary>>;
+}
+
+.disqus-comment-count:hover {
+  text-decoration: underline;
+}
+
+.disqus-hidden {
+  display: none;
+}

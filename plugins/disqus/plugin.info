@@ -1,0 +1,10 @@
+{
+  "title": "$:/plugins/sukima/disqus",
+  "description": "DISQUS conversations on a per tiddler basis",
+  "author": "DevinWeaver",
+  "plugin-type": "plugin",
+  "core-version": ">=5.0.0",
+  "source": "https://github.com/sukima/tw5-disqus-plugin/",
+  "version": "1.0.0",
+  "list": "readme"
+}

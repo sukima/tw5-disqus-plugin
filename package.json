@@ -1,0 +1,15 @@
+{
+  "name": "tw5-disqus-plugin",
+  "version": "1.0.0",
+  "description": "DISQUS comments in TiddlyWiki",
+  "scripts": {
+    "start": "tiddlywiki wiki --server",
+    "build": "tiddlywiki wiki-dist --build index externalimages static",
+    "clean": "rm -rf wiki-dist/output"
+  },
+  "author": "Devin Weaver <suki@tritarget.org> (http://tritarget.org/)",
+  "license": "MIT",
+  "devDependencies": {
+    "tiddlywiki": "^5.1.8"
+  }
+}

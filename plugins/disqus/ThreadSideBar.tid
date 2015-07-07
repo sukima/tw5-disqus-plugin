@@ -1,0 +1,6 @@
+title: $:/plugins/sukima/disqus/ThreadSideBar
+caption: DISQUS
+tags: [[$:/tags/SideBar]]
+list-before: $:/core/ui/SideBar/Open
+
+<$disqus-thread/>
