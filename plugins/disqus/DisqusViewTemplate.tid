@@ -2,4 +2,4 @@ title: $:/plugins/sukima/disqus/ViewTemplate
 tags: [[$:/tags/ViewTemplate]]
 list-before: $:/core/ui/ViewTemplate/tags
 
-<$disqus-count identifier={{!!identifier}} url={{!!url}} enableDisqus={{!!disqus}}/>
+<$disqus-count/>

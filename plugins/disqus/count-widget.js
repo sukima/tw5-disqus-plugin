@@ -47,15 +47,26 @@ DisqusCountWidget.prototype.createCountElement = function() {
 };
 
 DisqusCountWidget.prototype.execute = function() {
-  this.title = this.getVariable('currentTiddler');
-  var tiddler = $tw.wiki.getTiddler(this.title);
-  this.enabled = this.getAttribute('enableDisqus') ||
-    (tiddler && tiddler.hasTag('Disqus'));
-  this.identifier = this.getAttribute(
-    'disqus-id', encodeURIComponent(this.title.replace(/\s+/g, '-'))
-  );
-  var permalink = $tw.browser ? this.getPermalink() : null;
-  this.url = this.getAttribute('url', permalink);
+  // From Attributes
+  this.title = this.getAttribute('tiddler', this.getVariable('currentTiddler'));
+  this.identifier = this.getAttribute('identifier');
+  this.url = this.getAttribute('url');
+  this.enabled = this.identifier || this.url || this.getAttribute('enable');
+
+  // From Tiddler Fields
+  var tiddler = this.wiki.getTiddler(this.title);
+  if (tiddler) {
+    this.identifier = this.identifier || tiddler.getFieldString('disqus-id');
+    this.url = this.url || tiddler.getFieldString('disqus-url');
+    this.enabled = this.enabled ||
+      this.identifier || this.url ||
+      tiddler.getFieldString('disqus');
+  }
+
+  // Defaults
+  this.identifier = this.identifier ||
+    encodeURIComponent(this.title.replace(/\s+/g, '-'));
+  this.url = this.url || ($tw.browser ? this.getPermalink() : null);
 };
 
 DisqusCountWidget.prototype.getPermalink = function() {
