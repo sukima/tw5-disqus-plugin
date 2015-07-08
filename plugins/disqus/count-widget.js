@@ -16,28 +16,34 @@ var DisqusCountWidget = function(parseTreeNode, options) {
 DisqusCountWidget.prototype = new Widget();
 
 DisqusCountWidget.prototype.render = function(parent, nextSibling) {
+  if (!$tw.browser) { return; }
+
   this.parentNode = parent;
   this.computeAttributes();
   this.execute();
 
   if (!this.enabled) { return; }
 
-  domNode = document.createElement('button');
-  domNode.className = 'disqus-comment-count disqus-hidden tc-btn-invisible';
-  if (this.url) {
-    domNode.setAttribute('data-disqus-url', this.url);
-  } else {
-    domNode.setAttribute('data-disqus-identifier', this.identifier);
-  }
-  parent.insertBefore(domNode, nextSibling);
-  this.domNodes.push(domNode);
-  this.buttonNode = domNode;
+  this.buttonNode = this.createCountElement();
+  parent.insertBefore(this.buttonNode, nextSibling);
+  this.domNodes.push(this.buttonNode);
   $tw.utils.addEventListeners(this.buttonNode, [
     {name: 'click', handlerObject: this, handlerMethod: 'loadDisqusThread'}
   ]);
 
   $tw.wiki.addEventListener('disqus-count-change', this.postRender);
   disqusUtils.reloadDisqusCounts();
+};
+
+DisqusCountWidget.prototype.createCountElement = function() {
+  var domNode = document.createElement('button');
+  domNode.className = 'disqus-comment-count disqus-hidden tc-btn-invisible';
+  if (this.url) {
+    domNode.setAttribute('data-disqus-url', this.url);
+  } else {
+    domNode.setAttribute('data-disqus-identifier', this.identifier);
+  }
+  return domNode;
 };
 
 DisqusCountWidget.prototype.execute = function() {
@@ -47,14 +53,17 @@ DisqusCountWidget.prototype.execute = function() {
   this.identifier = this.getAttribute(
     'disqus-id', encodeURIComponent(this.title.replace(/\s+/g, '-'))
   );
-  // See https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/startup/story.js#L165-L180
-  // for how permalinks are constructed.
-  var permalink = [
+  var permalinks = $tw.browser ? this.getPermalink() : null;
+  this.url = this.getAttribute('url', permalink);
+};
+
+DisqusCountWidget.prototype.getPermalink = function() {
+  // See core/modules/startup/story.js for how permalinks are constructed.
+  // https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/startup/story.js#L165-L180
+  return [
     window.location.toString().split("#")[0],
     encodeURIComponent(this.title)
   ].join("#");
-  this.url = this.getAttribute('url', permalink);
-  // this.text = this.getAttribute('text');
 };
 
 DisqusCountWidget.prototype.postRender = function() {
