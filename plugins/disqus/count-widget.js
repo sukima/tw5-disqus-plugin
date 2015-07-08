@@ -48,8 +48,9 @@ DisqusCountWidget.prototype.createCountElement = function() {
 
 DisqusCountWidget.prototype.execute = function() {
   this.title = this.getVariable('currentTiddler');
+  var tiddler = $tw.wiki.getTiddler(this.title);
   this.enabled = this.getAttribute('enableDisqus') ||
-    $tw.wiki.getTiddler(this.title).hasTag('Disqus');
+    (tiddler && tiddler.hasTag('Disqus'));
   this.identifier = this.getAttribute(
     'disqus-id', encodeURIComponent(this.title.replace(/\s+/g, '-'))
   );
