@@ -5,8 +5,8 @@
   "description": "DISQUS comments in TiddlyWiki",
   "scripts": {
     "start": "tiddlywiki wiki --server",
-    "build": "tiddlywiki wiki-dist --build index externalimages static",
-    "clean": "rm -rf wiki-dist/output"
+    "build": "tiddlywiki wiki-dist --build index",
+    "clean": "rm -rf wiki-dist/output",
     "copy-output": "cp ./wiki-dist/output/index.html ./index.html",
     "git-co": "git checkout gh-pages && git reset --hard origin/gh-pages",
     "git-stage": "npm run build && npm run git-co && npm run copy-output",
