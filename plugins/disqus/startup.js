@@ -22,6 +22,8 @@ exports.platforms = ["browser"];
 exports.synchronous = true;
 
 exports.startup = function() {
+  $tw.wiki.addEventListener('change', handleChangeEvent);
+
   var shortname = disqusUtils.getConfig('shortname');
   window.disqus_shortname = shortname; // jshint ignore:line
 
@@ -33,7 +35,5 @@ exports.startup = function() {
 
     disqusUtils.loadDisqusScript(shortname, 'embed');
     disqusUtils.loadDisqusScript(shortname, 'count');
-
-    $tw.wiki.addEventListener('change', handleChangeEvent);
   }
 };
