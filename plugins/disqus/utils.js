@@ -18,12 +18,15 @@ exports.log = function() {
 exports.dependentTiddlers = ['shortname', 'identifier', 'url', 'title']
   .map(function(item) { return TIDDLER_PREFIX + item; });
 
-exports.loadDisqusScript = function(shortname, scriptname) {
+exports.loadDisqusScript = function(shortname, scriptname, callback) {
   var disqusScript = document.createElement('script');
   disqusScript.type = 'application/javascript';
   disqusScript.src = '//' + shortname + '.disqus.com/' + scriptname + '.js';
   disqusScript.async = true;
   disqusScript.defer = true;
+  if (typeof callback === 'function') {
+    disqusScript.onload = callback;
+  }
   exports.log('Loading Disqus script ' + disqusScript.src);
   document.getElementsByTagName('head')[0].appendChild(disqusScript);
 };

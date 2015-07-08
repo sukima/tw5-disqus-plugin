@@ -34,6 +34,8 @@ exports.startup = function() {
     document.getElementsByTagName('body')[0].appendChild(initialDisqusThread);
 
     disqusUtils.loadDisqusScript(shortname, 'embed');
-    disqusUtils.loadDisqusScript(shortname, 'count');
+    disqusUtils.loadDisqusScript(
+      shortname, 'count', disqusUtils.reloadDisqusCounts
+    );
   }
 };
