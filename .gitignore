@@ -1,4 +1,4 @@
 *
 !.gitignore
-!./package.json
-!./index.html
+!package.json
+!index.html
