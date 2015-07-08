@@ -53,7 +53,7 @@ DisqusCountWidget.prototype.execute = function() {
   this.identifier = this.getAttribute(
     'disqus-id', encodeURIComponent(this.title.replace(/\s+/g, '-'))
   );
-  var permalinks = $tw.browser ? this.getPermalink() : null;
+  var permalink = $tw.browser ? this.getPermalink() : null;
   this.url = this.getAttribute('url', permalink);
 };
 
